@@ -1,4 +1,4 @@
 paho-mqtt==1.4.0
 influxdb==5.2.2
 pandas==0.24.2
-minio-4.0.16
+minio==4.0.16
