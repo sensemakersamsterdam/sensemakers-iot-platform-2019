@@ -9,10 +9,10 @@
     "url": "/d/m2HAkciWk/mijnomgeving",
     "expires": "0001-01-01T00:00:00Z",
     "created": "2019-05-07T13:55:33Z",
-    "updated": "2019-06-12T16:27:13Z",
+    "updated": "2019-06-12T22:06:10Z",
     "updatedBy": "admin",
     "createdBy": "admin",
-    "version": 14,
+    "version": 15,
     "hasAcl": false,
     "isFolder": false,
     "folderId": 0,
@@ -38,7 +38,7 @@
     "gnetId": null,
     "graphTooltip": 0,
     "id": 6,
-    "iteration": 1560354324928,
+    "iteration": 1560375928876,
     "links": [],
     "panels": [
       {
@@ -81,70 +81,6 @@
         },
         "targets": [
           {
-            "groupBy": [],
-            "hide": true,
-            "measurement": "/.*/",
-            "orderByTime": "ASC",
-            "policy": "default",
-            "query": "SELECT \"Lat\" AS \"latitude\", \"Lon\" AS \"longitude\", \"waterTemperature\" AS \"metric\", \"name\" FROM /.*/ WHERE $timeFilter",
-            "rawQuery": true,
-            "refId": "A",
-            "resultFormat": "table",
-            "select": [
-              [
-                {
-                  "params": [
-                    "Lat"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [
-                    "latitude"
-                  ],
-                  "type": "alias"
-                }
-              ],
-              [
-                {
-                  "params": [
-                    "Lon"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [
-                    "longitude"
-                  ],
-                  "type": "alias"
-                }
-              ],
-              [
-                {
-                  "params": [
-                    "waterTemperature"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [
-                    "metric"
-                  ],
-                  "type": "alias"
-                }
-              ],
-              [
-                {
-                  "params": [
-                    "name"
-                  ],
-                  "type": "field"
-                }
-              ]
-            ],
-            "tags": []
-          },
-          {
             "groupBy": [
               {
                 "params": [
@@ -159,12 +95,11 @@
                 "type": "fill"
               }
             ],
-            "hide": false,
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT LAST(\"Lat\") AS \"latitude\", LAST(\"Lon\") AS \"longitude\", LAST(\"waterTemperature\") AS \"metric\", LAST(\"name\") AS \"name\" FROM /.*/ WHERE \"name\"::tag =~ /${name:regex}/ AND $timeFilter\n",
+            "query": "SELECT LAST(\"waterTemperature\") AS \"metric\", \"Lat\" AS \"latitude\", \"Lon\" AS \"longitude\", \"name\"::tag AS \"name\" FROM /.*/ WHERE \"name\"::tag =~ /${name:regex}/ AND $timeFilter GROUP BY *",
             "rawQuery": true,
-            "refId": "B",
+            "refId": "C",
             "resultFormat": "table",
             "select": [
               [
@@ -231,11 +166,11 @@
         "targets": [
           {
             "groupBy": [],
-            "hide": true,
+            "hide": false,
             "measurement": "/.*/",
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT \"Lat\" AS \"latitude\", \"Lon\" AS \"longitude\", \"waterEC\" AS \"metric\", \"name\" FROM /.*/ WHERE $timeFilter",
+            "query": "SELECT LAST(\"waterEC\") AS \"metric\", \"Lat\" AS \"latitude\", \"Lon\" AS \"longitude\", \"name\"::tag AS \"name\" FROM /.*/ WHERE \"name\"::tag =~ /${name:regex}/ AND $timeFilter GROUP BY *",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "table",
@@ -288,44 +223,6 @@
                     "name"
                   ],
                   "type": "field"
-                }
-              ]
-            ],
-            "tags": []
-          },
-          {
-            "groupBy": [
-              {
-                "params": [
-                  "$__interval"
-                ],
-                "type": "time"
-              },
-              {
-                "params": [
-                  "null"
-                ],
-                "type": "fill"
-              }
-            ],
-            "hide": false,
-            "orderByTime": "ASC",
-            "policy": "default",
-            "query": "SELECT LAST(\"Lat\") AS \"latitude\", LAST(\"Lon\") AS \"longitude\", LAST(\"waterEC\") AS \"metric\", LAST(\"name\") AS \"name\" FROM /.*/ WHERE \"name\"::tag =~ /${name:regex}/ AND $timeFilter\n",
-            "rawQuery": true,
-            "refId": "B",
-            "resultFormat": "table",
-            "select": [
-              [
-                {
-                  "params": [
-                    "value"
-                  ],
-                  "type": "field"
-                },
-                {
-                  "params": [],
-                  "type": "mean"
                 }
               ]
             ],
@@ -693,7 +590,6 @@
         }
       }
     ],
-    "refresh": "5s",
     "schemaVersion": 16,
     "style": "dark",
     "tags": [],
@@ -761,6 +657,6 @@
     "timezone": "",
     "title": "mijnomgeving",
     "uid": "m2HAkciWk",
-    "version": 14
+    "version": 15
   }
 }
