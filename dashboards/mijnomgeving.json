@@ -9,10 +9,10 @@
     "url": "/d/m2HAkciWk/mijnomgeving",
     "expires": "0001-01-01T00:00:00Z",
     "created": "2019-05-07T13:55:33Z",
-    "updated": "2019-06-06T13:05:53Z",
+    "updated": "2019-06-12T16:27:13Z",
     "updatedBy": "admin",
     "createdBy": "admin",
-    "version": 6,
+    "version": 14,
     "hasAcl": false,
     "isFolder": false,
     "folderId": 0,
@@ -38,7 +38,7 @@
     "gnetId": null,
     "graphTooltip": 0,
     "id": 6,
-    "iteration": 1559826298069,
+    "iteration": 1560354324928,
     "links": [],
     "panels": [
       {
@@ -162,7 +162,7 @@
             "hide": false,
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT LAST(\"Lat\") AS \"latitude\", LAST(\"Lon\") AS \"longitude\", LAST(\"waterTemperature\") AS \"metric\", LAST(\"name\") AS \"name\" FROM /.*/ WHERE \"name\" =~ /${name:regex}/ AND $timeFilter\n",
+            "query": "SELECT LAST(\"Lat\") AS \"latitude\", LAST(\"Lon\") AS \"longitude\", LAST(\"waterTemperature\") AS \"metric\", LAST(\"name\") AS \"name\" FROM /.*/ WHERE \"name\"::tag =~ /${name:regex}/ AND $timeFilter\n",
             "rawQuery": true,
             "refId": "B",
             "resultFormat": "table",
@@ -184,7 +184,7 @@
           }
         ],
         "thresholds": "0,10",
-        "title": "Water Temperature",
+        "title": "Last Water Temperature",
         "type": "grafana-worldmap-panel",
         "unitPlural": "",
         "unitSingle": "",
@@ -311,7 +311,7 @@
             "hide": false,
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT LAST(\"Lat\") AS \"latitude\", LAST(\"Lon\") AS \"longitude\", LAST(\"waterEC\") AS \"metric\", LAST(\"name\") AS \"name\" FROM /.*/ WHERE \"name\" =~ /${name:regex}/ AND $timeFilter\n",
+            "query": "SELECT LAST(\"Lat\") AS \"latitude\", LAST(\"Lon\") AS \"longitude\", LAST(\"waterEC\") AS \"metric\", LAST(\"name\") AS \"name\" FROM /.*/ WHERE \"name\"::tag =~ /${name:regex}/ AND $timeFilter\n",
             "rawQuery": true,
             "refId": "B",
             "resultFormat": "table",
@@ -333,7 +333,7 @@
           }
         ],
         "thresholds": "400,500",
-        "title": "Water Electric Current",
+        "title": "Last Water Electric Current",
         "type": "grafana-worldmap-panel",
         "unitPlural": "",
         "unitSingle": "",
@@ -376,7 +376,7 @@
         "steppedLine": false,
         "targets": [
           {
-            "alias": "",
+            "alias": "$tag_name",
             "groupBy": [
               {
                 "params": [
@@ -395,7 +395,7 @@
             "measurement": "/.*/",
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT waterTemperature FROM /.*/ WHERE \"name\" =~ /${name:regex}/",
+            "query": "SELECT waterTemperature FROM /.*/ WHERE \"name\"::tag =~ /${name:regex}/ GROUP BY \"name\"",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series",
@@ -494,7 +494,7 @@
         "steppedLine": false,
         "targets": [
           {
-            "alias": "",
+            "alias": "$tag_name",
             "groupBy": [
               {
                 "params": [
@@ -512,7 +512,7 @@
             "measurement": "/.*/",
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT waterEC FROM /.*/ WHERE \"name\" =~ /${name:regex}/",
+            "query": "SELECT waterEC FROM /.*/ WHERE \"name\"::tag =~ /${name:regex}/ GROUP BY \"name\"",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series",
@@ -573,6 +573,124 @@
           "align": false,
           "alignLevel": null
         }
+      },
+      {
+        "aliasColors": {},
+        "bars": false,
+        "dashLength": 10,
+        "dashes": false,
+        "datasource": "InfluxDB_mijnomgeving",
+        "fill": 0,
+        "gridPos": {
+          "h": 9,
+          "w": 12,
+          "x": 0,
+          "y": 18
+        },
+        "id": 7,
+        "legend": {
+          "avg": false,
+          "current": false,
+          "max": false,
+          "min": false,
+          "show": true,
+          "total": false,
+          "values": false
+        },
+        "lines": true,
+        "linewidth": 1,
+        "links": [],
+        "nullPointMode": "null",
+        "percentage": false,
+        "pointradius": 2,
+        "points": true,
+        "renderer": "flot",
+        "seriesOverrides": [],
+        "spaceLength": 10,
+        "stack": false,
+        "steppedLine": false,
+        "targets": [
+          {
+            "alias": "$tag_name",
+            "groupBy": [
+              {
+                "params": [
+                  "$__interval"
+                ],
+                "type": "time"
+              },
+              {
+                "params": [
+                  "null"
+                ],
+                "type": "fill"
+              }
+            ],
+            "hide": false,
+            "measurement": "/.*/",
+            "orderByTime": "ASC",
+            "policy": "default",
+            "query": "SELECT batteryVoltage FROM /.*/ WHERE \"name\"::tag =~ /${name:regex}/ GROUP BY \"name\"",
+            "rawQuery": true,
+            "refId": "A",
+            "resultFormat": "time_series",
+            "select": [
+              [
+                {
+                  "params": [
+                    "*"
+                  ],
+                  "type": "field"
+                },
+                {
+                  "params": [],
+                  "type": "mean"
+                }
+              ]
+            ],
+            "tags": []
+          }
+        ],
+        "thresholds": [],
+        "timeFrom": null,
+        "timeRegions": [],
+        "timeShift": null,
+        "title": "Battery Voltage",
+        "tooltip": {
+          "shared": true,
+          "sort": 0,
+          "value_type": "individual"
+        },
+        "type": "graph",
+        "xaxis": {
+          "buckets": null,
+          "mode": "time",
+          "name": null,
+          "show": true,
+          "values": []
+        },
+        "yaxes": [
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          },
+          {
+            "format": "short",
+            "label": null,
+            "logBase": 1,
+            "max": null,
+            "min": null,
+            "show": true
+          }
+        ],
+        "yaxis": {
+          "align": false,
+          "alignLevel": null
+        }
       }
     ],
     "refresh": "5s",
@@ -591,15 +709,15 @@
             ]
           },
           "datasource": "InfluxDB_mijnomgeving",
-          "definition": "SELECT DISTINCT(\"name\") FROM /.*/",
+          "definition": "SHOW TAG VALUES WITH KEY = \"name\"",
           "hide": 0,
           "includeAll": true,
           "label": "Sensor name",
           "multi": true,
           "name": "name",
           "options": [],
-          "query": "SELECT DISTINCT(\"name\") FROM /.*/",
-          "refresh": 1,
+          "query": "SHOW TAG VALUES WITH KEY = \"name\"",
+          "refresh": 2,
           "regex": "",
           "skipUrlSync": false,
           "sort": 1,
@@ -643,6 +761,6 @@
     "timezone": "",
     "title": "mijnomgeving",
     "uid": "m2HAkciWk",
-    "version": 6
+    "version": 14
   }
 }
