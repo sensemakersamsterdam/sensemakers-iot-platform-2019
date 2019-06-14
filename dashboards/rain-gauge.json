@@ -8,11 +8,11 @@
     "slug": "rain-gauge",
     "url": "/d/L8fQTXiZz/rain-gauge",
     "expires": "0001-01-01T00:00:00Z",
-    "created": "2019-05-13T13:53:57Z",
-    "updated": "2019-06-12T22:40:01Z",
+    "created": "2019-06-14T08:28:46Z",
+    "updated": "2019-06-14T10:25:21Z",
     "updatedBy": "admin",
     "createdBy": "admin",
-    "version": 6,
+    "version": 3,
     "hasAcl": false,
     "isFolder": false,
     "folderId": 0,
@@ -37,7 +37,7 @@
     "editable": true,
     "gnetId": null,
     "graphTooltip": 0,
-    "id": 8,
+    "id": null,
     "links": [],
     "panels": [
       {
@@ -45,6 +45,7 @@
         "bars": false,
         "dashLength": 10,
         "dashes": false,
+        "datasource": "InfluxDB_test_project",
         "fill": 1,
         "gridPos": {
           "h": 9,
@@ -77,6 +78,8 @@
         "targets": [
           {
             "alias": "rain counter",
+            "expr": "",
+            "format": "time_series",
             "groupBy": [
               {
                 "params": [
@@ -91,6 +94,7 @@
                 "type": "fill"
               }
             ],
+            "intervalFactor": 1,
             "measurement": "gauge001",
             "orderByTime": "ASC",
             "policy": "default",
@@ -210,7 +214,7 @@
             ],
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT DIFFERENCE(LAST(\"rain_counter\")) FROM gauge001 WHERE $timeFilter GROUP BY time(1d)",
+            "query": "SELECT 0.254*DIFFERENCE(LAST(\"rain_counter\")) FROM gauge001 WHERE $timeFilter GROUP BY time(1d)",
             "rawQuery": true,
             "refId": "B",
             "resultFormat": "time_series",
@@ -328,7 +332,7 @@
             "measurement": "gauge001",
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "select 1000000000/elapsed(\"difference\") from (select * from (select difference(\"rain_counter\") from gauge001) where difference=1)\n",
+            "query": "select 0.254*3600*1000000000/elapsed(\"difference\") from (select * from (select difference(\"rain_counter\") from gauge001) where difference=1)\n",
             "rawQuery": true,
             "refId": "A",
             "resultFormat": "time_series",
@@ -444,7 +448,7 @@
             ],
             "orderByTime": "ASC",
             "policy": "default",
-            "query": "SELECT DIFFERENCE(LAST(\"rain_counter\")) FROM gauge001 WHERE $timeFilter GROUP BY time(1h) ",
+            "query": "SELECT 0.254*DIFFERENCE(LAST(\"rain_counter\")) FROM gauge001 WHERE $timeFilter GROUP BY time(1h) ",
             "rawQuery": true,
             "refId": "B",
             "resultFormat": "time_series",
@@ -543,7 +547,7 @@
         "steppedLine": false,
         "targets": [
           {
-            "alias": "mean electric charge per hour",
+            "alias": "mean electric current per hour",
             "groupBy": [
               {
                 "params": [
@@ -584,7 +588,7 @@
         "timeFrom": null,
         "timeRegions": [],
         "timeShift": null,
-        "title": "Droplet electric charge",
+        "title": "Droplet electric current",
         "tooltip": {
           "shared": true,
           "sort": 0,
@@ -660,6 +664,6 @@
     "timezone": "",
     "title": "Rain gauge",
     "uid": "L8fQTXiZz",
-    "version": 6
+    "version": 3
   }
 }
