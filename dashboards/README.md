@@ -20,10 +20,11 @@ For dashboard provisioning, the unique identifired `uid` is important when synci
 
 https://grafana.com/docs/http_api/dashboard/#identifier-id-vs-unique-identifier-uid
 
-Remove the `id` field from the JSON file.
+Remove the `id` field from the JSON file. Metadata can be also removed.
 
 ```
 jq '.dashboard.id=null' dashboard.json | sponge dashboard.json
+jq 'del(.meta)' dashboard.json | sponge dashboard.json
 ```
 
 Import the dashboard.
