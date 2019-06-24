@@ -1,25 +1,4 @@
 {
-  "meta": {
-    "type": "db",
-    "canSave": true,
-    "canEdit": true,
-    "canAdmin": true,
-    "canStar": true,
-    "slug": "mijnomgeving",
-    "url": "/d/m2HAkciWk/mijnomgeving",
-    "expires": "0001-01-01T00:00:00Z",
-    "created": "2019-06-14T08:28:47Z",
-    "updated": "2019-06-24T07:11:59Z",
-    "updatedBy": "admin",
-    "createdBy": "admin",
-    "version": 4,
-    "hasAcl": false,
-    "isFolder": false,
-    "folderId": 0,
-    "folderTitle": "General",
-    "folderUrl": "",
-    "provisioned": false
-  },
   "dashboard": {
     "annotations": {
       "list": [
