@@ -1,4 +1,4 @@
-# Sensemakers IoT Platform
+# SURFsara IoT Platform for Sensemakers
 
 Sensemakers make use of the IoT data streaming and analytics platform hosted at SURFsara.
 
