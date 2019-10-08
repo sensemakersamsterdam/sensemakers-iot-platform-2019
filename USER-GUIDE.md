@@ -11,7 +11,7 @@ This page show how to use individual components of the SURFsara IoT Platform for
 ## MQTT
 
 | | **admin** user | **project1** user | **project2** user | **public** user** |
-| :---- | :---- | :---- | :---- |
+| :---- | :---- | :---- | :---- | :---- |
 | **public** topic | read/write | read/write | read/write | read/write |
 | **pipeline/project1** topic | read/write | read/write | read-only | read-only |
 | **pipeline/project2** topic | read/write | read-only | read/write | read-only |
@@ -33,7 +33,7 @@ Every projects is given project-specific user and database in InfluxDB. Messages
 The following table shows the access rights for different users:
 
 | | **admin** user | **project1** user | **project2** user | **public** user** |
-| :---- | :---- | :---- | :---- |
+| :---- | :---- | :---- | :---- | :---- |
 | **project1** database | read/write | read-only | no access | no access |
 | **project2** database | read/write | no access | read-only | no access |
 
@@ -120,6 +120,7 @@ Alternatively, one can interact with the database through [InfluxDB HTTP endpont
 ## Minio
 
 | | **admin** user | **public** user |
+| :---- | :---- | :---- |
 | **data** bucket | read/write | read-only |
 | **metadata** bucket | read/write | read-only |
 
@@ -127,7 +128,7 @@ Alternatively, one can interact with the database through [InfluxDB HTTP endpont
 ## Grafana
 
 | | **admin** user | **project1** user | **project2** user | **public** user** |
-| :---- | :---- | :---- | :---- |
+| :---- | :---- | :---- | :---- | :---- |
 | **monitoring** folder | view/edit | no access | no access | no access |
 | **project1** folder | view/edit | view/edit | view | view |
 | **project2** folder | view/edit | view | view/edit | view |
