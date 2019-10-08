@@ -97,7 +97,7 @@ curl –XPOST https://openfaas.sensemakersams.org/function/faas-mqtt?mqtt_user=a
 ## InfluxDB
 
 Every projects is given project-specific user and database in InfluxDB.
-Messages sent to the [automated data pipeline](DATA.md#automated-data-pipeline) are stored in the database related to the project. All values in a message are stored in the time series belonging to the device.
+Messages sent to the [automated data pipeline](DATA.md#automated-data-pipeline) are immediately replicated to the database related to the project for the period of 90 days. All values in a message are stored in the time series belonging to the specific device.
 
 The following table shows the access rights for different users:
 
@@ -200,8 +200,7 @@ curl -XPOST \
 
 ## Minio
 
-Minio serves as a long-term data storage. Minio uses so-called buckets for storing objects.
-Two buckets are defined for the messages sent to the [automated data pipeline](DATA.md#automated-data-pipeline):
+Minio serves as a long-term data storage of raw messages sent to the [automated data pipeline](DATA.md#automated-data-pipeline). The messages are uploaded to Minio on a daily basis. Minio uses so-called buckets for storing objects:
 - **data** bucket holds the raw messages in the JSON format. The messages are organised in folders according to the projects and files for a given device and a calendar date. It is the date of the arrival of each message to the data platform that determines to which file the message is appended, not the actual timestamp reported in the message. The naming convention is `app_id/dev_id-YYYY-mm-dd.json`.
 - **metadata** bucket holds the metadata in the JSON format extracted from every data file. The naming convention is the same as above.
 
