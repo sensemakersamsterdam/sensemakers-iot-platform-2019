@@ -48,6 +48,8 @@ mosquitto_sub -t $PROJECT_NAME -h mqtt.sensemakersams.org -p 9998 -u $PROJECT_NA
 mosquitto_pub -t $PROJECT_NAME -m 42 -h mqtt.sensemakersams.org -p 9998 -u $PROJECT_NAME -P $PROJECT_PASSWORD
 ```
 
+The automated pipeline uses a topic composed of `pipeline/app_id/dev_id` where `app_id` and `dev_id` are the unique project identifier (project name) within the platform and the unique device identifer (device name) within the project, respectively.
+
 Listen to all messages from the automated pipeline:
 
 ```sh
