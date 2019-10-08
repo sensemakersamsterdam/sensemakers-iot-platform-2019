@@ -10,7 +10,7 @@ This page show how to use individual components of the SURFsara IoT Platform for
 
 ## MQTT
 
-| | **admin** user | **project1** user | **project2** user | **public** user** |
+| | **admin** user | **project1** user | **project2** user | **public** user |
 | :---- | :---- | :---- | :---- | :---- |
 | **public** topic | read/write | read/write | read/write | read/write |
 | **pipeline/project1** topic | read/write | read/write | read-only | read-only |
@@ -28,14 +28,15 @@ mosquitto_sub -t pipeline/# -h mqtt.sensemakersams.org -p 9998 -u public -P $PUB
 
 ## InfluxDB
 
-Every projects is given project-specific user and database in InfluxDB. Messages sent to the [automated data pipeline](DATA.md#automated-data-pipeline) are stored in the database related to the project. All values in a message are stored in the time series belonging to the device.
+Every projects is given project-specific user and database in InfluxDB.
+Messages sent to the [automated data pipeline](DATA.md#automated-data-pipeline) are stored in the database related to the project. All values in a message are stored in the time series belonging to the device.
 
 The following table shows the access rights for different users:
 
-| | **admin** user | **project1** user | **project2** user | **public** user** |
-| :---- | :---- | :---- | :---- | :---- |
-| **project1** database | read/write | read-only | no access | no access |
-| **project2** database | read/write | no access | read-only | no access |
+| | **admin** user | **public** user |
+| :---- | :---- | :---- |
+| **project1** database | read/write | read-only |
+| **project2** database | read/write | read-only |
 
 Data can be accessed using the [influx command line client](https://docs.influxdata.com/influxdb/v1.7/tools/shell/).
 
@@ -44,8 +45,8 @@ First, connect to the database in InfluxDB for your project:
 ```sh
 influx -host influxdb.sensemakersams.org \
 	-port 443 -ssl \
-	-username $PROJECT_NAME \
-	-password $PROJECT_PASSWORD \
+	-username public \
+	-password $PUBLIC_PASSWORD \
 	-database $PROJECT_NAME
 ```
 
@@ -89,10 +90,10 @@ Some example queries:
 The influx client can be used to download data in a CSV or JSON format:
 
 ```sh
-> influx -host influxdb.sensemakersams.org \
+influx -host influxdb.sensemakersams.org \
 	-port 443 -ssl \
-	-username $PROJECT_NAME \
-	-password $PROJECT_PASSWORD \
+	-username public \
+	-password $PUBLIC_PASSWORD \
 	-database $PROJECT_NAME \
     -precision rfc3339 \
 	-execute "SELECT * FROM \"357518080332281\"" -format csv
@@ -111,7 +112,7 @@ name,time,FixAge,Lat,Lon,SatInFix,TimeActive,altitude,batteryVoltage,boardTemper
 Alternatively, one can interact with the database through [InfluxDB HTTP endponts](https://docs.influxdata.com/influxdb/v1.7/tools/api/). An example query is given below.
 
 ```sh
-> curl "https://influxdb.sensemakersams.org/query?u=$PROJECT_NAME&p=$PROJECT_PASSWORD" \
+curl "https://influxdb.sensemakersams.org/query?u=public&p=$PUBLIC_PASSWORD" \
     --data-urlencode "db=$PROJECT_NAME" \
     --data-urlencode "q=SHOW MEASUREMENTS"
 ```
@@ -119,15 +120,62 @@ Alternatively, one can interact with the database through [InfluxDB HTTP endpont
 
 ## Minio
 
+Minio serves as a long-term data storage. Minio uses so-called buckets for storing objects.
+Two buckets are defined for the messages sent to the [automated data pipeline](DATA.md#automated-data-pipeline):
+- **data** bucket holds the raw messages in the JSON format. The messages are organised in folders according to the projects and files for a given device and a calendar date. It is the date of the arrival of each message to the data platform that determines to which file the message is appended, not the actual timestamp reported in the message. The naming convention is `app_id/dev_id-YYYY-mm-dd.json`.
+- **metadata** bucket holds the metadata in the JSON format extracted from every data file. The naming convention is the same as above.
+
+The following table shows the access rights for different users:
+
 | | **admin** user | **public** user |
 | :---- | :---- | :---- |
 | **data** bucket | read/write | read-only |
 | **metadata** bucket | read/write | read-only |
 
+The Minio object store has a web UI that can be accessed at https://minio.sensemakersams.org. For command-line access, use the [mc client](https://github.com/minio/mc). To initialise the Minio client with the Minio instance in the platform, use Minio config:
+
+```sh
+mc config host add sensemakers \
+    https://minio.sensemakersams.org \
+    public $PUBLIC_PASSWORD
+```
+
+Example usage:
+- List files:
+```sh
+mc ls sensemakers
+mc ls sensemakers --recursive
+mc ls sensemakers/data/mijnomgeving
+```
+
+- Copy files:
+```sh
+mc cp sensemakers/data/mijnomgeving/357518080330582-2019-10-06.json .
+mc cp --recursive sensemakers/data/mijnomgeving .
+```
+
+- Copy files using wildcards:
+```sh
+mc find sensemakers/data/mijnomgeving --name "357518080330582*.json" --exec "mc cp {} ."
+```
+
+- Investigate contents of a file:
+```sh
+mc cat sensemakers/metadata/mijnomgeving/357518080330582-2019-10-06.json
+mc head -n 42 sensemakers/data/mijnomgeving/357518080330582-2019-10-06.json
+```
+
+More information on the use of the client can be found in the [Minio documentation](https://docs.min.io/docs/minio-client-complete-guide).
+
 
 ## Grafana
 
-| | **admin** user | **project1** user | **project2** user | **public** user** |
+Grafana dashboards can be accessed at https://grafana.sensemakersams.org. The dashboards in Grafana are organised in folders. Besides the monitoring folder with dashboards showing metrics about the plafrom performance and usage, every project is given a folder to create dashboards with custom data visualisations.
+See the [Grafana documentation](https://grafana.com/docs/) for more details.
+
+The following table shows the access rights for different users:
+
+| | **admin** user | **project1** user | **project2** user | **public** user |
 | :---- | :---- | :---- | :---- | :---- |
 | **monitoring** folder | view/edit | no access | no access | no access |
 | **project1** folder | view/edit | view/edit | view | view |
