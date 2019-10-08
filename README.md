@@ -16,7 +16,7 @@ The diagram below gives an high-level overview of the platform. More details can
 - For more information on the data flows and data formats, see the **[data section](DATA.md)**.
 
 Besides the documentation, the following can be found in this repository:
-- **[slides](Sensemakers\ platform.pdf)** with the platform overview
+- **[slides](Sensemakers%20platform.pdf)** with the platform overview
 - example code showing how to access data
 - example Jupyter notebooks
 - backups of the Grafana dashboards
