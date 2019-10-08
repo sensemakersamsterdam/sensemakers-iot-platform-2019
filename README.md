@@ -1,6 +1,6 @@
 # SURFsara IoT Platform for Sensemakers
 
-Sensemakers make use of the IoT data streaming and analytics platform hosted at SURFsara.
+Sensemakers make use of the IoT data streaming and analytics platform hosted at **[SURFsara](https://www.surf.nl/en)**.
 
 The SURFsara IoT Platform for Sensemakers is a platform for storing, monitoring, visualising and analyzing sensor data. It is a collaboration platform designed to host multiple projects carried by the Sensemakers community. In addition, there is a project dedicated to experimentation, available for everyone to use. All data within the platform is shared.
 
@@ -12,11 +12,11 @@ The platform is built from the following open-source components, deployed as a f
 - **[OpenFaaS](https://www.openfaas.com/)** serverless functions give access to the platform through an HTTP entry point, take care of the metadata extraction and enable custom event-driven actions.
 
 The diagram below gives an high-level overview of the platform. More details can be found on dedicated pages:
-- The [user guide](USER-GUIDE.md) gives examples on how to use the platform.
-- For more information on the data flows and data formats, see the [data section](DATA.md).
+- The **[user guide](USER-GUIDE.md)** gives examples on how to use the platform.
+- For more information on the data flows and data formats, see the **[data section](DATA.md)**.
 
 Besides the documentation, the following can be found in this repository:
-- [slides](Sensemakers platform.pdf) with the platform overview
+- **[slides](Sensemakers\ platform.pdf)** with the platform overview
 - example code showing how to access data
 - example Jupyter notebooks
 - backups of the Grafana dashboards
