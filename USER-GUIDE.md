@@ -268,3 +268,7 @@ The following table shows the access rights for different users:
 
 
 ## Jupyter
+
+JupyterHub is available at https://jupyter.sensemakersams.org/hub/login. Every project gets its private project volume for saving notebooks and data produced by the notebooks.
+
+As explained in the [automated data pipeline](DATA.md#automated-data-pipeline) section, a shared volume is available in the platform to aggreage raw messages before they are uploaded to Minio. This shared volume is readable from the Jupyter notebooks, giving access to the files with historical and new messages.

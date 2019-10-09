@@ -7,12 +7,12 @@ The following table gives a high-level overview.
 
 | **Data store** | **Data format** | **Purpose** | **Availability of new data** | **Retention period** |
 | :---- | :---- | :---- | :---- | :---- |
-| Mosquitto (pipeline topic) | standardised JSON format | Automated data pipeline, real-time data consumption | real-time | |
-| Mosquitto (other topics) | any format | Real-time data consumption | real-time | |
-| InfluxDB | Time series | Visualisation and time series queries | real-time | 90 days |
-| Shared volume | JSON | Sort messages on the project/device/date basis, programmatic analysis with Jupyter notebooks | real-time | long-term |
-| Minio (data) | JSON | Programmatic analysis of sensor data | on a daily basis | long-term |
-| Minio (metadata) | JSON | Programmatic analysis of sensor metadata | on a daily basis | long-term |
+| Mosquitto (pipeline topic) | standardised JSON format | automated data pipeline, real-time data consumption | real-time | |
+| Mosquitto (other topics) | any format | real-time data consumption | real-time | |
+| InfluxDB | Time series | visualisation and time series queries | real-time | 90 days |
+| Shared volume | JSON | sort messages on the project/device/date basis, programmatic analysis with Jupyter notebooks | real-time | long-term |
+| Minio (data) | JSON | programmatic analysis of sensor data | on a daily basis | long-term |
+| Minio (metadata) | JSON | programmatic analysis of sensor metadata | on a daily basis | long-term |
 
 
 ## Data format
