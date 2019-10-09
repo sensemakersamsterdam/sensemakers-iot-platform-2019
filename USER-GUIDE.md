@@ -213,7 +213,9 @@ The following table shows the access rights for different users:
 | **data** bucket | read/write | read-only |
 | **metadata** bucket | read/write | read-only |
 
-The Minio object store has a web UI that can be accessed at https://minio.sensemakersams.org. For command-line access, use the [mc client](https://github.com/minio/mc). To initialise the Minio client with the Minio instance in the platform, use Minio config:
+The Minio object store has a web UI that can be accessed at https://minio.sensemakersams.org. From the UI, it is easy to see and download data with a click of a button.
+
+For command-line access, use the [mc client](https://github.com/minio/mc). To initialise the Minio client with the Minio instance in the platform, use Minio config:
 
 ```sh
 mc config host add sensemakers \
@@ -272,3 +274,12 @@ The following table shows the access rights for different users:
 JupyterHub is available at https://jupyter.sensemakersams.org/hub/login. Every project gets its user account and a private project volume for saving notebooks and data produced by the notebooks.
 
 As explained in the [automated data pipeline](DATA.md#automated-data-pipeline) section, a shared volume is available in the platform to aggreage raw messages before they are uploaded to Minio. This shared volume is readable from the Jupyter notebooks under `/home/shared`, giving access to the files with historical and new messages.
+
+The following table gives a summary of the access rights for different users:
+
+| **admin** user | **project1** user | **project2** user |
+| :---- | :---- | :---- | :---- | :---- |
+| **shared volume** | read-only | read-only | read-only |
+| **admin** private volume | read/write | no access | no access |
+| **project1** private volume | no access | read/write | no access |
+| **project2** private volume | no access | no access | read/write |
