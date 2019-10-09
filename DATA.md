@@ -65,8 +65,7 @@ Example messages:
     "dev_id": "test_device",
     "payload_fields": {
         "temperature": 42
-    },
-    "time": 1557244616000
+    }
 }
 ```
 
@@ -74,6 +73,7 @@ Example messages:
 {
     "app_id": "test_project",
     "dev_id": "test_device",
+    "time": 1557244616000,
     "payload_fields": {
         "temperature": 42,
         "foo": "bar"
