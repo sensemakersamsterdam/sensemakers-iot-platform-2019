@@ -92,7 +92,7 @@ An automated data pipeline is in place to re-distribute the data entering the pl
 
 **Acting on the incoming MQTT messages**
 - Write every incoming message one-by-one to the InfluxDB time-series database (see the [InfluxDB fields and tags](#influxdb-fields-and-tags) section for more details).
-- Write raw messages to the shared volume. The individual messages are appended to files for a given project/device and a calendar date. It is the date of the arrival of each message to the data platform that determines to which file the message is appended, not the actual timestamp reported in the message. The naming convention for the directories/files is `/data/app_id/dev_id-YYYY-mm-dd.json`. The shared volume is in place for the following two reasons: aggreage messages before uploading to Minio, provide a shared location with raw messages accessible from Jupyter notebooks.
+- Write raw messages to the shared volume. The individual messages are appended to files for a given project/device and a calendar date. It is the date of the arrival of each message to the data platform that determines to which file the message is appended, not the actual timestamp reported in the message. The naming convention for the directories/files is `/data/app_id/dev_id-YYYY-MM-DD.json`. The shared volume is in place for the following two reasons: aggreage messages before uploading to Minio, provide a shared location with raw messages accessible from Jupyter notebooks.
 - Invoke a serverless function at `https://openfaas.sensemakersams.org/async-function/app_id`. This is a placeholder for each project and an OpenFaaS function with such name can be deployed by the platform administrator to enable event-driven actions.
 
 **Copying data to Mino**
@@ -121,7 +121,7 @@ All quantities from a message are stored in InfluxDB in a *measurement* correspo
 
 ## Metadata in Minio
 
-For every raw data file stored in Minio, metadata is extracted and stored in the `metadata` bucket. There is one metadata file for every data file, with the same naming convention, i.e. `app_id/dev_id-YYYY-mm-dd.json`. The following information is available in metadata:
+For every raw data file stored in Minio, metadata is extracted and stored in the `metadata` bucket. There is one metadata file for every data file, with the same naming convention, i.e. `app_id/dev_id-YYYY-MM-DD.json`. The following information is available in metadata:
 - `app_id` and `dev_id`
 - `date_start` and `date_end` give the data range of the actual measurements stored in the data file. Because the date of the arrival of each message to the data platform that determines in file the message is stored, a single file can contain measurements taken on different days (e.g. from a battery-powered device sending data in batches once in a while).
 - `keys` listing the available quantities measured by the device

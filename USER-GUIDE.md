@@ -203,7 +203,7 @@ curl -XPOST \
 ## Minio
 
 Minio serves as a long-term data storage of raw messages sent to the [automated data pipeline](DATA.md#automated-data-pipeline). The messages are uploaded to Minio on a daily basis. Minio uses so-called buckets for storing objects:
-- **data** bucket holds the raw messages in the JSON format. The messages are organised in folders according to the projects and files for a given device and a calendar date. It is the date of the arrival of each message to the data platform that determines to which file the message is appended, not the actual timestamp reported in the message. The naming convention is `app_id/dev_id-YYYY-mm-dd.json`.
+- **data** bucket holds the raw messages in the JSON format. The messages are organised in folders according to the projects and files for a given device and a calendar date. It is the date of the arrival of each message to the data platform that determines to which file the message is appended, not the actual timestamp reported in the message. The naming convention is `app_id/dev_id-YYYY-MM-DD.json`.
 - **metadata** bucket holds the metadata in the JSON format extracted from every data file. The naming convention is the same as above.
 
 The following table shows the access rights for different users:
