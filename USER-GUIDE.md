@@ -67,8 +67,8 @@ Send a message to the automated pipeline:
 ```sh
 mosquitto_pub -t pipeline/$PROJECT_NAME/test_device \
     -m '{"app_id": "'$PROJECT_NAME'", "dev_id": "test_device", "payload_fields": {"temperature": 42}}' \
-	-h mqtt.sensemakersams.org -p 9998 \
-	-u $PROJECT_NAME -P $PROJECT_PASSWORD
+    -h mqtt.sensemakersams.org -p 9998 \
+    -u $PROJECT_NAME -P $PROJECT_PASSWORD
 ```
 
 The `pipeline` topic only accepts messages in a specific format, see the [data format](DATA.md#data-format) section for more details.
@@ -114,10 +114,10 @@ First, connect to the database in InfluxDB for your project:
 
 ```sh
 influx -host influxdb.sensemakersams.org \
-	-port 443 -ssl \
-	-username public \
-	-password $PUBLIC_PASSWORD \
-	-database $PROJECT_NAME
+    -port 443 -ssl \
+    -username public \
+    -password $PUBLIC_PASSWORD \
+    -database $PROJECT_NAME
 ```
 
 Next, show the available measurements and series:
@@ -163,12 +163,12 @@ The influx client can be used to download data in a CSV or JSON format:
 
 ```sh
 influx -host influxdb.sensemakersams.org \
-	-port 443 -ssl \
-	-username public \
-	-password $PUBLIC_PASSWORD \
-	-database $PROJECT_NAME \
+    -port 443 -ssl \
+    -username public \
+    -password $PUBLIC_PASSWORD \
+    -database $PROJECT_NAME \
     -precision rfc3339 \
-	-execute "SELECT * FROM \"357518080332281\"" -format csv
+    -execute "SELECT * FROM \"357518080332281\"" -format csv
 name,time,FixAge,Lat,Lon,SatInFix,TimeActive,altitude,batteryVoltage,boardTemperature,course,dev_id,imei,lastResetCause,name,speed,timestamp,waterEC,waterTemperature
 357518080332281,2019-07-10T00:41:19.831Z,255,0.0000255,0.0000255,0,26231,0,3.96,24,0,357518080332281,357518080332281,32,EC 242,0,1562719373,0,22.85
 357518080332281,2019-07-10T00:56:19.83Z,255,0.0000255,0.0000255,0,27131,0,3.96,24,0,357518080332281,357518080332281,32,EC 242,0,1562720273,0,22.85
@@ -219,7 +219,7 @@ The Minio object store has a web UI that can be accessed at https://minio.sensem
 mc config host add sensemakers \
     https://minio.sensemakersams.org \
     public $PUBLIC_PASSWORD \
-	--api s3v4
+    --api s3v4
 ```
 
 Example usage:
