@@ -1,6 +1,6 @@
 # User guide
 
-This page show how to use individual components of the SURFsara IoT Platform for Sensemakers. Project are deployed with a **project user**. All data can be accessed using the **public user** account.
+This page show how to use individual components of the **SURFsara IoT Platform for Sensemakers**. Project are deployed with a **project user**. All data can be accessed using the **public user** account.
 
 The following topics are covered below:
 - [using MQTT](#mqtt)
