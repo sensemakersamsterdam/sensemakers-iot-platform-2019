@@ -65,6 +65,7 @@ An automated data pipeline is in place to re-distribute the data entering the pl
 **Acting on the incoming MQTT messages**
 - Write every incoming message one-by-one to the InfluxDB time-series database (see the [InfluxDB fields and tags](#influxdb-fields-and-tags) section for more details).
 - Write raw messages to the shared volume. The individual messages are appended to files for a given project/device and a calendar date. It is the date of the arrival of each message to the data platform that determines to which file the message is appended, not the actual timestamp reported in the message. The naming convention for the directories/files is `/data/app_id/dev_id-YYYY-mm-dd.json`. The shared volume is in place for the following two reasons: aggreage messages before uploading to Minio, provide a shared location with raw messages accessible from Jupyter notebooks.
+- Invoke a serverless function at `https://openfaas.sensemakersams.org/async-function/app_id`. This is a placeholder for each project and an OpenFaaS function with such name can be deployed by the platform administrator to enable event-driven actions.
 
 **Copying data to Mino**
 - A cron job is running every night to copy all data files from the shared volume from the previous day into Minio into the `data` bucket.
