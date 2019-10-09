@@ -3,7 +3,7 @@
 For the messages sent to the `pipeline` topic defined in the MQTT broker, or to the HTTP entry point, the [automated data pipeline](#automated-data-pipeline) takes care of automatic re-distribution into the platform's storage services. In order to enable the automated processing, the incoming data has to be standardised (see the section on the [data format](#data-format)).
 
 This section describes all the data formats used in the **SURFsara IoT platform for Sensemakers** and explains how data is organised/stored at different levels.
-The following table gives a high-level overview.
+The following table gives a high-level overview. All data within the platform is shared.
 
 | **Data store** | **Data format** | **Purpose** | **Availability of new data** | **Retention period** |
 | :---- | :---- | :---- | :---- | :---- |
