@@ -76,7 +76,7 @@ Example messages:
     "dev_id": "test_device",
     "payload_fields": {
         "temperature": 42,
-         "foo": "bar"
+        "foo": "bar"
     },
     "tag_fields": {
         "foo": "bar"
