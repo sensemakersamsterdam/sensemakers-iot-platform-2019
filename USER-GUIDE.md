@@ -59,7 +59,7 @@ mosquitto_sub -t pipeline/# -h mqtt.sensemakersams.org -p 9998 -u public -P $PUB
 Listen to all messages from the automated pipeline from a specific project:
 
 ```sh
-mosquitto_sub -t pipeline/$PROJECT_NAME/+ -h mqtt.sensemakersams.org -p 9998 -u public -P public1234
+mosquitto_sub -t pipeline/$PROJECT_NAME/+ -h mqtt.sensemakersams.org -p 9998 -u public -P $PUBLIC_PASSWORD
 ```
 
 Send a message to the automated pipeline:
