@@ -277,7 +277,7 @@ As explained in the [automated data pipeline](DATA.md#automated-data-pipeline) s
 
 The following table gives a summary of the access rights for different users:
 
-| **admin** user | **project1** user | **project2** user |
+| | **admin** user | **project1** user | **project2** user |
 | :---- | :---- | :---- | :---- | :---- |
 | **shared volume** | read-only | read-only | read-only |
 | **admin** private volume | read/write | no access | no access |
