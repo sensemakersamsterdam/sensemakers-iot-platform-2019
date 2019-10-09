@@ -50,12 +50,40 @@ The messages entering the platform through the `pipeline` topic are required to 
 The individual fields correspond to:
 - `app_id`: unique project identifier (project name) within the platform
 - `dev_id`: unique device identifer (device name) within the project
-- `time`: timestamp (in milliseconds since unix epoch) of the measurement
+- `time` (optional): timestamp (in milliseconds since unix epoch) of the measurement. In case it is not provided, the server time upon message arrival will be used.
 - `payload_fields`: key-value pairs (JSON) corresponding to the quantity names and measured values
-- `tag_fields`: kay-value pairs (JSON) that will be useful to identify different time series in InfluxDB (see the [InfluxDB fields and tags](#influxdb-fields-and-tags) section for more details)
-- custom fields: additionals field are allowed and will be stored in the raw data files.
+- `tag_fields` (optional): kay-value pairs (JSON) that will be useful to identify different time series in InfluxDB (see the [InfluxDB fields and tags](#influxdb-fields-and-tags) section for more details)
+- custom fields (optional): additionals field are allowed and will be stored in the raw data files
 
 The automated pipeline uses a topic composed of `pipeline/app_id/dev_id`. The messages where `app_id` and `dev_id` does not coincide with the identifiers specified in the topic will be ignored.
+
+Example messages:
+
+```
+{
+    "app_id": "test_project",
+    "dev_id": "test_device",
+    "payload_fields": {
+        "temperature": 42
+    },
+    "time": 1557244616000
+}
+```
+
+```
+{
+    "app_id": "test_project",
+    "dev_id": "test_device",
+    "payload_fields": {
+        "temperature": 42,
+         "foo": "bar"
+    },
+    "tag_fields": {
+        "foo": "bar"
+    },
+    "foo": "bar"
+}
+```
 
 
 ## Automated data pipeline
