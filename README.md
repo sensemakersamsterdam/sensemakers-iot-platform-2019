@@ -1,5 +1,7 @@
 # SURFsara IoT Platform for Sensemakers
 
+**DEPRECATED** Since 2020, a lightweight IoT platform developed by SURF is in use for Sensemakers.
+
 The [IoT Sensemakers Amsterdam](https://www.sensemakersams.org/) community make use of the IoT data streaming and analytics platform hosted at [SURFsara](https://www.surf.nl/en).
 
 The **SURFsara IoT Platform for Sensemakers** is a platform for storing, monitoring, visualising and analyzing sensor data. It is a collaboration platform designed to host multiple [projects](https://www.sensemakersams.org/projects/) carried by the Sensemakers community. In addition, there is a project dedicated to experimentation, available for everyone to use. All data within the platform is shared.
