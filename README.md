@@ -1,6 +1,6 @@
 # SURFsara IoT Platform for Sensemakers
 
-**DEPRECATED** Since 2020, a lightweight IoT platform developed by SURF is in use for Sensemakers.
+**DEPRECATED since 2020, this platform is no longer in use. Instead, a lightweight IoT platform developed by SURF is in use for Sensemakers.**
 
 The [IoT Sensemakers Amsterdam](https://www.sensemakersams.org/) community make use of the IoT data streaming and analytics platform hosted at [SURFsara](https://www.surf.nl/en).
 
